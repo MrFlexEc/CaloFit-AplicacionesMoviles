@@ -6,4 +6,188 @@
     android:layout_height="match_parent"
     tools:context=".Inicio_Menu">
 
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="418dp"
+        android:layout_height="94dp"
+        android:background="#8BC34A"
+        android:gravity="end"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView8"
+            style="@android:style/Widget.Material.TextView.SpinnerItem"
+            android:layout_width="372dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Bienvenido(a) Nombre"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:textColor="#FBFBFB"
+            android:textSize="28sp"
+            android:translationX="6dp"
+            android:translationY="24dp"
+            android:typeface="sans"
+            android:visibility="visible" />
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/imageButton_Pacientes"
+        android:layout_width="96dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/Boton_redondo"
+        android:backgroundTint="#8BC34A"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/paciente"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="148dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton_Platos"
+        android:layout_width="96dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/Boton_redondo"
+        android:backgroundTint="#8BC34A"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.043"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/paciente"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="148dp"
+        tools:srcCompat="@drawable/Platos" />
+
+    <ImageButton
+        android:id="@+id/imageButton_Registros"
+        android:layout_width="96dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/Boton_redondo"
+        android:backgroundTint="#8BC34A"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.94"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/paciente"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="148dp"
+        tools:srcCompat="@drawable/Registro" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="87dp"
+        android:layout_height="27dp"
+        android:autoSizeTextType="none"
+        android:text="Platos"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="231dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="93dp"
+        android:layout_height="28dp"
+        android:text="Pacientes"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        tools:layout_editor_absoluteX="159dp"
+        tools:layout_editor_absoluteY="231dp" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="91dp"
+        android:layout_height="30dp"
+        android:text="Registros"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        tools:layout_editor_absoluteX="282dp"
+        tools:layout_editor_absoluteY="231dp" />
+
+    <Button
+        android:id="@+id/button1_add_plato"
+        android:layout_width="380dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#F3F8BC"
+        android:text="Agregar Plato"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:cornerRadius="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="310dp" />
+
+
+    <Button
+        android:id="@+id/button3_add_registr"
+        android:layout_width="380dp"
+        android:layout_height="63dp"
+        android:backgroundTint="#F3F8BC"
+        android:text="Agregar Registro"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:cornerRadius="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="550dp" />
+
+    <Button
+        android:id="@+id/button2_add_pacient"
+        android:layout_width="380dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#F3F8BC"
+        android:checkable="false"
+        android:text="Agregar Paciente"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:cornerRadius="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/button3_add_registr"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button1_add_plato"
+        app:layout_constraintVertical_bias="0.492" />
+
+    <Button
+        android:id="@+id/button_CerrarSesion"
+        android:layout_width="235dp"
+        android:layout_height="39dp"
+        android:backgroundTint="#8BC34A"
+        android:text="Cerrar Sesion"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        app:cornerRadius="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="679dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
