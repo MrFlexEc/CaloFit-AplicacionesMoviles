@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun AbrirInicio(){
-        val intent= Intent(this, Inicio::class.java).apply {  }
+        val intent= Intent(this, Inicio_Menu::class.java).apply {  }
         startActivity(intent)
     }
 }
