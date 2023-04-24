@@ -15,13 +15,17 @@ import androidx.core.content.ContextCompat
 import com.example.calofit.databinding.ActivityAgregarPlatosBinding
 
 class Agregar_Platos : AppCompatActivity() {
+    //Crear una variable binding apuntando a la actividad en la que nos ubicamos
     private lateinit var binding: ActivityAgregarPlatosBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //Inflate a la variable binding de nuestra actividad
         binding = ActivityAgregarPlatosBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        //Recoleccion de evento del boton de guardado
         binding.button3.setOnClickListener{requestPermission()}
 
+        //Creacion del metodo para mostrar alerta al guardar
         val simpleDialog = AlertDialog.Builder(this)
             .setTitle("Plato registrado")
             .setMessage("El plato se guardo exitosamente")
@@ -32,7 +36,7 @@ class Agregar_Platos : AppCompatActivity() {
 
         binding.button4.setOnClickListener{simpleDialog.show()}
     }
-
+    //Funcion para pedir los permisos para acceder a la galeria
     private fun requestPermission(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             when{

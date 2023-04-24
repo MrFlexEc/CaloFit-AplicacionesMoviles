@@ -9,6 +9,7 @@ class Inicio_Menu : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inicio_menu)
+        //Call a las funciones creadas
         abrirRegistroPaciente()
         abrirRegistroPlatos()
         abrirRegistroRegister()
