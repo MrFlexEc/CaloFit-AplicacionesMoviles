@@ -8,7 +8,7 @@
 
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/btn_pac1"
         android:layout_width="386dp"
         android:layout_height="120dp"
         android:backgroundTint="@color/yellowcolor"
@@ -19,11 +19,14 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:cornerRadius="8dp"
-        tools:layout_editor_absoluteX="12dp"
-        tools:layout_editor_absoluteY="145dp" />
+        app:layout_constraintBottom_toTopOf="@+id/btn_pac2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+
 
     <Button
-        android:id="@+id/button9"
+        android:id="@+id/btn_pac2"
         android:layout_width="386dp"
         android:layout_height="120dp"
         android:backgroundTint="@color/yellowcolor"
@@ -34,16 +37,19 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:cornerRadius="8dp"
-        tools:layout_editor_absoluteX="12dp"
-        tools:layout_editor_absoluteY="305dp" />
-
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+        app:layout_constraintVertical_bias="0.435" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="418dp"
         android:layout_height="94dp"
         android:background="#97DF6D"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 

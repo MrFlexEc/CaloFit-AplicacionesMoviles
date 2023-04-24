@@ -13,6 +13,9 @@ class Inicio_Menu : AppCompatActivity() {
         abrirRegistroPaciente()
         abrirRegistroPlatos()
         abrirRegistroRegister()
+        abrirVerPaciente()
+        abrirVerPlato()
+        abrirVerRegistro()
     }
     //Abrir pantalla de registro de Platos
     fun abrirRegistroPlatos(){
@@ -48,6 +51,41 @@ class Inicio_Menu : AppCompatActivity() {
     }
     fun AbrirAgregarRegistro(){
         val intent= Intent(this, Agregar_Registro::class.java).apply {  }
+        startActivity(intent)
+    }
+    fun abrirVerPlato(){
+        var btnViewPlatos: Button
+        btnViewPlatos = findViewById(R.id.btn_plato)
+        btnViewPlatos.setOnClickListener{
+            AbrirVerPlato()
+        }
+    }
+
+    fun AbrirVerPlato(){
+        val intent= Intent(this, Ver_Platos::class.java).apply {  }
+        startActivity(intent)
+    }
+    fun abrirVerPaciente(){
+        var btnViewPlatos: Button
+        btnViewPlatos = findViewById(R.id.btn_paciente)
+        btnViewPlatos.setOnClickListener{
+            AbrirVerPaciente()
+        }
+    }
+    fun AbrirVerPaciente(){
+        val intent= Intent(this, Ver_Paciente::class.java).apply {  }
+        startActivity(intent)
+    }
+    fun abrirVerRegistro(){
+        var btnViewPlatos: Button
+        btnViewPlatos = findViewById(R.id.btn_registro)
+        btnViewPlatos.setOnClickListener{
+            AbrirVerRegistro()
+        }
+    }
+
+    fun AbrirVerRegistro(){
+        val intent= Intent(this, Ver_Registro::class.java).apply {  }
         startActivity(intent)
     }
 }
