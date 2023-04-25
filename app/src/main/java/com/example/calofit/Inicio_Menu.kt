@@ -16,6 +16,7 @@ class Inicio_Menu : AppCompatActivity() {
         abrirVerPaciente()
         abrirVerPlato()
         abrirVerRegistro()
+        volverLogin()
     }
     //Abrir pantalla de registro de Platos
     fun abrirRegistroPlatos(){
@@ -86,6 +87,18 @@ class Inicio_Menu : AppCompatActivity() {
 
     fun AbrirVerRegistro(){
         val intent= Intent(this, Ver_Registro::class.java).apply {  }
+        startActivity(intent)
+    }
+
+    fun volverLogin(){
+        var btnCerrarSesion: Button
+        btnCerrarSesion = findViewById(R.id.btnCerrarSesion)
+        btnCerrarSesion.setOnClickListener{
+            VolverLogin()
+        }
+    }
+    fun VolverLogin(){
+        val intent= Intent(this, MainActivity::class.java).apply {  }
         startActivity(intent)
     }
 }

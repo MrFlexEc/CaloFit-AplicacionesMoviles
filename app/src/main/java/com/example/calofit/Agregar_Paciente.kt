@@ -8,6 +8,8 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
@@ -22,17 +24,25 @@ class Agregar_Paciente : AppCompatActivity() {
         binding = ActivityAgregarPacienteBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.button.setOnClickListener{ requestPermission() }
+        binding.btnImagenPaciente.setOnClickListener{ requestPermission() }
 
         val simpleDialog = AlertDialog.Builder(this)
-            .setTitle("Plato registrado")
-            .setMessage("El plato se guardo exitosamente")
+            .setTitle("Paciente registrado")
+            .setMessage("El paciente se guardo exitosamente")
             .setPositiveButton("Aceptar"){_,_ ->
-                Toast.makeText(this, "Plato registrado", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Paciente registrado", Toast.LENGTH_SHORT).show()
             }
             .create()
 
-        binding.button2.setOnClickListener{simpleDialog.show()}
+        binding.btnguardarPaciente.setOnClickListener{simpleDialog.show()}
+
+        /*
+        var BtnInicioMenu: ImageButton
+        BtnInicioMenu=findViewById(R.id.btnHome)
+
+        BtnInicioMenu.setOnClickListener {
+            AbrirInicio()
+        }*/
     }
 
     private fun requestPermission(){
@@ -64,7 +74,7 @@ class Agregar_Paciente : AppCompatActivity() {
     ){result->
         if(result.resultCode == Activity.RESULT_OK){
             val data = result.data?.data
-            binding.imageView.setImageURI(data)
+            binding.ImagenPaciente.setImageURI(data)
         }
     }
     private fun pickPhotoFromGallery(){
@@ -72,4 +82,11 @@ class Agregar_Paciente : AppCompatActivity() {
         intent.type = "image/*"
         startForActivityGallery.launch(intent)
     }
+
+    /*
+    fun AbrirInicio(){
+        val intent= Intent(this, Inicio_Menu::class.java).apply {  }
+        startActivity(intent)
+    }*/
+
 }

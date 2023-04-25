@@ -12,7 +12,7 @@
         android:layout_height="63dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="30dp"
         android:backgroundTint="@color/yellowcolor"
         android:drawableLeft="@drawable/agregarplatos"
         android:text="Agregar Plato"
@@ -60,34 +60,31 @@
         android:id="@+id/imageButton_Pacientes"
         android:layout_width="96dp"
         android:layout_height="75dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="44dp"
         android:background="@drawable/boton_redondo"
         android:backgroundTint="@color/greencolor"
         android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.038"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:srcCompat="@drawable/paciente"
         tools:ignore="MissingConstraints" />
 
+
     <ImageButton
         android:id="@+id/imagebutton_platos"
         android:layout_width="96dp"
         android:layout_height="75dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="32dp"
         android:background="@drawable/boton_redondo"
         android:backgroundTint="@color/greencolor"
         android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton_Registros"
+        app:layout_constraintStart_toEndOf="@+id/imageButton_Pacientes"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:srcCompat="@drawable/paciente"
+        app:srcCompat="@drawable/platos"
         tools:ignore="MissingConstraints"
         tools:srcCompat="@drawable/platos" />
 
@@ -95,26 +92,22 @@
         android:id="@+id/imageButton_Registros"
         android:layout_width="96dp"
         android:layout_height="75dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="28dp"
         android:background="@drawable/boton_redondo"
         android:backgroundTint="@color/greencolor"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.94"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:srcCompat="@drawable/paciente"
+        app:srcCompat="@drawable/registro"
         tools:ignore="MissingConstraints"
         tools:srcCompat="@drawable/registro" />
-
 
     <Button
         android:id="@+id/button3_add_registr"
         android:layout_width="380dp"
         android:layout_height="63dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="58dp"
         android:backgroundTint="@color/yellowcolor"
         android:drawableLeft="@drawable/agregarregistro"
         android:text="Agregar Registro"
@@ -124,9 +117,9 @@
         android:textSize="15sp"
         android:textStyle="bold"
         app:cornerRadius="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/button_CerrarSesion"
+        app:layout_constraintBottom_toTopOf="@+id/btnCerrarSesion"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -135,7 +128,7 @@
         android:layout_height="63dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="30dp"
         android:backgroundTint="@color/yellowcolor"
         android:checkable="false"
         android:drawableLeft="@drawable/agregarpaciente"
@@ -152,7 +145,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button_CerrarSesion"
+        android:id="@+id/btnCerrarSesion"
         android:layout_width="235dp"
         android:layout_height="39dp"
         android:layout_marginBottom="24dp"
@@ -169,12 +162,11 @@
         android:id="@+id/btn_paciente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
         android:backgroundTint="@color/yellowcolor"
         android:text="Pacientes"
         android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.054"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButton_Pacientes" />
 
@@ -182,26 +174,26 @@
         android:id="@+id/btn_plato"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
         android:backgroundTint="@color/yellowcolor"
         android:text="Platos"
         android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_registro"
+        app:layout_constraintStart_toEndOf="@+id/btn_paciente"
         app:layout_constraintTop_toBottomOf="@+id/imagebutton_platos" />
 
     <Button
         android:id="@+id/btn_registro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
         android:backgroundTint="@color/yellowcolor"
         android:text="Registros"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.945"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButton_Registros" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,7 +23,7 @@ class Agregar_Platos : AppCompatActivity() {
         binding = ActivityAgregarPlatosBinding.inflate(layoutInflater)
         setContentView(binding.root)
         //Recoleccion de evento del boton de guardado
-        binding.button3.setOnClickListener{requestPermission()}
+        binding.btnImagenPlato.setOnClickListener{requestPermission()}
 
         //Creacion del metodo para mostrar alerta al guardar
         val simpleDialog = AlertDialog.Builder(this)
@@ -34,7 +34,7 @@ class Agregar_Platos : AppCompatActivity() {
             }
             .create()
 
-        binding.button4.setOnClickListener{simpleDialog.show()}
+        binding.btnGuardarPlato.setOnClickListener{simpleDialog.show()}
     }
     //Funcion para pedir los permisos para acceder a la galeria
     private fun requestPermission(){
@@ -66,7 +66,7 @@ class Agregar_Platos : AppCompatActivity() {
     ){result->
         if(result.resultCode == Activity.RESULT_OK){
             val data = result.data?.data
-            binding.imageView2.setImageURI(data)
+            binding.ImagenPlato.setImageURI(data)
         }
     }
     private fun pickPhotoFromGallery(){

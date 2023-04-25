@@ -7,66 +7,78 @@
     tools:context=".Agregar_Platos">
 
     <EditText
-        android:id="@+id/editTextTextPersonName7"
+        android:id="@+id/AGP_NombrePlato"
         android:layout_width="353dp"
         android:layout_height="47dp"
-        android:layout_marginBottom="48dp"
-        android:background="#ECEDC1"
+        android:padding="15dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="29dp"
+        android:background="@color/yellowcolor"
         android:backgroundTint="#ECEDC1"
         android:ems="10"
+        android:hint="Nombre"
         android:inputType="textPersonName"
-        android:text="Nombre"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnImagenPlato" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName6"
+        android:id="@+id/AGP_CaloriasPlato"
         android:layout_width="353dp"
         android:layout_height="47dp"
-        android:background="#ECEDC1"
+        android:padding="15dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="29dp"
+        android:background="@color/yellowcolor"
         android:backgroundTint="#ECEDC1"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Calorias"
-        app:layout_constraintBottom_toTopOf="@+id/button4"
+        android:hint="Calorias"
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
-        app:layout_constraintVertical_bias="0.744" />
+        app:layout_constraintTop_toBottomOf="@+id/AGP_NombrePlato" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btnGuardarPlato"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="148dp"
+        android:layout_marginEnd="147dp"
+        android:layout_marginBottom="56dp"
         android:backgroundTint="#97DF6D"
         android:fontFamily="sans-serif-black"
         android:text="Guardar"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
-        app:layout_constraintVertical_bias="0.938" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnImagenPlato"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="100dp"
         android:backgroundTint="#97DF6D"
         android:text="Seleccionar imagen"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
-        app:layout_constraintVertical_bias="0.813" />
+        app:layout_constraintTop_toBottomOf="@+id/ImagenPlato" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/ImagenPlato"
         android:layout_width="105dp"
         android:layout_height="105dp"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
+        android:layout_marginStart="153dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="153dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
         app:srcCompat="@drawable/agregarimagen" />
