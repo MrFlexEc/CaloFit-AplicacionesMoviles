@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.calofitv2.calofit.ui.InicioScreen
 import com.example.calofitv2.calofit.ui.LoginScreen
 import com.example.calofitv2.calofit.ui.SplashScreen
 
@@ -18,7 +19,10 @@ fun AppNavigation(){
             SplashScreen(navController)
         }
         composable(AppScreen.Login.route){
-            LoginScreen()
+            LoginScreen(navController)
+        }
+        composable(AppScreen.Inicio.route){
+            InicioScreen(navController)
         }
     }
 }
