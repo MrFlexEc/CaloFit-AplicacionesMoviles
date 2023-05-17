@@ -8,6 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.calofitv2.calofit.ui.InicioScreen
 import com.example.calofitv2.calofit.ui.LoginScreen
 import com.example.calofitv2.calofit.ui.SplashScreen
+import com.google.firebase.auth.FirebaseAuth
 
 @Composable
 fun AppNavigation(){
@@ -19,7 +20,7 @@ fun AppNavigation(){
             SplashScreen(navController)
         }
         composable(AppScreen.Login.route){
-            LoginScreen(navController)
+            LoginScreen(navController, auth = FirebaseAuth.getInstance())
         }
         composable(AppScreen.Inicio.route){
             InicioScreen(navController)

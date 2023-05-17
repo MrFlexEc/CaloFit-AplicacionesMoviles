@@ -1,18 +1,20 @@
 package com.example.calofitv2.calofit.ui
 
+import android.util.Log
+import android.util.Patterns
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
@@ -24,10 +26,16 @@ import com.example.calofitv2.R
 import com.example.calofitv2.calofit.navigation.AppScreen
 import com.example.calofitv2.ui.theme.greencolor
 import com.example.calofitv2.ui.theme.greentext
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
+private val auth by lazy {
+    Firebase.auth
+}
 @Composable
-fun LoginScreen(navController: NavController){
+fun LoginScreen(navController: NavController, auth: FirebaseAuth){
 
     Box(
         Modifier
@@ -36,12 +44,12 @@ fun LoginScreen(navController: NavController){
 
     ){
         //Se crea el login y se centra los elementos
-        LoginInterface(Modifier.align(Alignment.TopCenter),navController)
+        LoginInterface(Modifier.align(Alignment.TopCenter),navController, auth)
     }
 }
 
 @Composable
-fun LoginInterface(modifier: Modifier, navController: NavController) {
+fun LoginInterface(modifier: Modifier, navController: NavController, auth: FirebaseAuth) {
 
     Column(horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement =Arrangement.Center,modifier = modifier) {
@@ -53,41 +61,58 @@ fun LoginInterface(modifier: Modifier, navController: NavController) {
         Spacer(modifier = Modifier.padding(5.dp))
         Subtitulo2(Modifier.align(Alignment.CenterHorizontally))
         Spacer(modifier = Modifier.padding(15.dp))
-        EmailDoctor()
-        Spacer(modifier = Modifier.padding(8.dp))
-        ContrasenaDoctor()
-        Spacer(modifier = Modifier.padding(16.dp))
-        BtnIniciarSesion(navController)
+        DatosInicioSesion(navController)
+        //EmailDoctor()
+
+       //ContrasenaDoctor()
+
+        //BtnIniciarSesion()
     }
 
 
 }
 
 @Composable
-fun BtnIniciarSesion(navController: NavController) {
-    Button(onClick = {
-                    navController.navigate(route = AppScreen.Inicio.route)
-    },
-       // enabled = emailValue.length > 2,
-        modifier = Modifier
-            .fillMaxWidth(50.8f)
-            .height(50.dp),
-        colors = ButtonDefaults.buttonColors(
-            backgroundColor = Color(0xFF6DE161),
-            disabledBackgroundColor = Color.Gray,
-            contentColor = Color.White,
-            disabledContentColor = Color.White,
-        ),
-        shape = RoundedCornerShape(50)
-    ) {
-        Text(text = "Iniciar Sesion", fontSize = 20.sp)
-    }
-}
-
-@Composable
-fun ContrasenaDoctor() {
+fun DatosInicioSesion(navController: NavController) {
     val passwordValue = remember { mutableStateOf("")}
     val passwordVisibility  = remember { mutableStateOf(false)}
+    val emailValue = remember { mutableStateOf("") }
+    val isEmailValid by derivedStateOf {
+        Patterns.EMAIL_ADDRESS.matcher(emailValue.value).matches()
+    }
+    val isPasswordValid by derivedStateOf {
+        passwordValue.value.length>5
+    }
+    OutlinedTextField(
+        value = emailValue.value,
+        onValueChange = {emailValue.value=it},
+        label = { Text(text = "Usuario")},
+        placeholder = { Text(text = "Usuario")},
+        singleLine =  true,
+        modifier = Modifier
+            .fillMaxWidth(),
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Email
+        )
+        ,
+        colors = TextFieldDefaults.textFieldColors(
+            backgroundColor = Color.Transparent,
+            placeholderColor = Color.Black,
+            focusedLabelColor = Color.Black
+        ),
+
+        isError = !isEmailValid,
+
+        leadingIcon = {
+            Icon(painter = painterResource(id = R.drawable.doctor),
+                contentDescription = null,
+                modifier = Modifier.padding(end=2.dp).size(25.dp,25.dp)
+            )
+        }
+    )
+
+    Spacer(modifier = Modifier.padding(8.dp))
+
     OutlinedTextField(
         value = passwordValue.value,
         onValueChange = {passwordValue.value=it},
@@ -96,7 +121,7 @@ fun ContrasenaDoctor() {
         singleLine =  true,
         modifier = Modifier
             .fillMaxWidth()
-            ,
+        ,
         colors = TextFieldDefaults.textFieldColors(
             backgroundColor = Color.Transparent,
             placeholderColor = Color.Black,
@@ -108,6 +133,7 @@ fun ContrasenaDoctor() {
                 modifier = Modifier.padding(end=2.dp).size(25.dp,25.dp)
             )
         },
+        isError = !isPasswordValid,
         trailingIcon = {
             IconButton(onClick = {
                 passwordVisibility.value =!passwordVisibility.value
@@ -129,33 +155,53 @@ fun ContrasenaDoctor() {
 
     )
 
+    Spacer(modifier = Modifier.padding(16.dp))
+
+    Button(onClick = {
+        auth.signInWithEmailAndPassword(emailValue.value,passwordValue.value )
+            .addOnCompleteListener{task->
+                if(task.isSuccessful){
+                    Log.d("Ingresaste","Bien hecho")
+                    navController.navigate(route = AppScreen.Inicio.route)
+                }
+                else{
+                    Log.d("No Ingresaste","mmmmmmm ${task.result.toString()}")
+                }
+            }
+
+
+
+    },
+        // enabled = emailValue.length > 2,
+        modifier = Modifier
+            .fillMaxWidth(50.8f)
+            .height(50.dp),
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = Color(0xFF6DE161),
+            disabledBackgroundColor = Color.Gray,
+            contentColor = Color.White,
+            disabledContentColor = Color.White,
+        ),
+        shape = RoundedCornerShape(50)
+    ) {
+        Text(text = "Iniciar Sesion", fontSize = 20.sp)
+    }
+
+
+
+}
+
+@Composable
+fun BtnIniciarSesion() {
+}
+
+@Composable
+fun ContrasenaDoctor() {
+
 }
 
 @Composable
 fun EmailDoctor() {
-    val emailValue = remember { mutableStateOf("") }
-    OutlinedTextField(
-        value = emailValue.value,
-        onValueChange = {emailValue.value=it},
-        label = { Text(text = "Usuario")},
-        placeholder = { Text(text = "Usuario")},
-        singleLine =  true,
-        modifier = Modifier
-            .fillMaxWidth()
-            ,
-        colors = TextFieldDefaults.textFieldColors(
-            backgroundColor = Color.Transparent,
-            placeholderColor = Color.Black,
-            focusedLabelColor = Color.Black
-        ),
-        leadingIcon = {
-            Icon(painter = painterResource(id = R.drawable.doctor),
-                contentDescription = null,
-                modifier = Modifier.padding(end=2.dp).size(25.dp,25.dp)
-                )
-        }
-    )
-
 }
 
 @Composable

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "701427791782",
+    "project_id": "calofitvdatabase",
+    "storage_bucket": "calofitvdatabase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:701427791782:android:3ca5360265580822aa0167",
+        "android_client_info": {
+          "package_name": "com.example.calofitv2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "701427791782-ev8vcjh914omkil1he8s14va94tsht14.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSronIf7kh77FUud8fVNi4t4QTay0RbZI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "701427791782-ev8vcjh914omkil1he8s14va94tsht14.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
