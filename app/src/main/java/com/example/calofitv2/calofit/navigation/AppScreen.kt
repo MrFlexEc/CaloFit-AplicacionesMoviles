@@ -6,4 +6,10 @@ sealed class AppScreen (val route: String){
     object SplashScreen: AppScreen("Splash_Screen")
     object Login: AppScreen("Login_Screen")
     object Inicio: AppScreen("Inicio_Screen")
+    object VerPacientes: AppScreen("Ver_Pacientes_Screen")
+    object VerPlatos: AppScreen("Ver_Platos_Screen")
+    object VerRegistros: AppScreen("Ver_Registro_Screen")
+    object AgregarPaciente: AppScreen("Agregar_Paciente_Screen")
+    object AgregarPlato: AppScreen("Agregar_Plato_Screen")
+    object AgregarRegistro: AppScreen("Agregar_Registro_Screen")
 }

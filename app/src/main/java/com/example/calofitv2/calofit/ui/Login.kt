@@ -53,13 +53,13 @@ fun LoginInterface(modifier: Modifier, navController: NavController, auth: Fireb
 
     Column(horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement =Arrangement.Center,modifier = modifier) {
-        Titulo1(Modifier.align(Alignment.CenterHorizontally))
+        Titulo1Login(Modifier.align(Alignment.CenterHorizontally))
         Spacer(modifier = Modifier.padding(5.dp))
-        LogoImage(Modifier.align(Alignment.CenterHorizontally))
+        LogoImageLogin(Modifier.align(Alignment.CenterHorizontally))
         Spacer(modifier = Modifier.padding(5.dp))
-        Subtitulo1(Modifier.align(Alignment.CenterHorizontally))
+        Subtitulo1Login(Modifier.align(Alignment.CenterHorizontally))
         Spacer(modifier = Modifier.padding(5.dp))
-        Subtitulo2(Modifier.align(Alignment.CenterHorizontally))
+        Subtitulo2Login(Modifier.align(Alignment.CenterHorizontally))
         Spacer(modifier = Modifier.padding(15.dp))
         DatosInicioSesion(navController)
         //EmailDoctor()
@@ -168,9 +168,6 @@ fun DatosInicioSesion(navController: NavController) {
                     Log.d("No Ingresaste","mmmmmmm ${task.result.toString()}")
                 }
             }
-
-
-
     },
         // enabled = emailValue.length > 2,
         modifier = Modifier
@@ -205,7 +202,7 @@ fun EmailDoctor() {
 }
 
 @Composable
-fun Subtitulo2(modifier: Modifier) {
+fun Subtitulo2Login(modifier: Modifier) {
     Text(
         text = "Ingrese su usuario y contraseña",
         fontSize = 20.sp,
@@ -215,7 +212,7 @@ fun Subtitulo2(modifier: Modifier) {
 }
 
 @Composable
-fun Subtitulo1(modifier: Modifier) {
+fun Subtitulo1Login(modifier: Modifier) {
     Text(
         text = "BIENVENIDO",
         fontSize = 25.sp,
@@ -224,7 +221,7 @@ fun Subtitulo1(modifier: Modifier) {
 }
 
 @Composable
-fun Titulo1(modifier: Modifier) {
+fun Titulo1Login(modifier: Modifier) {
     Text(
         text = "REGISTRO DE CALORIAS",
         fontSize = 25.sp,
@@ -234,7 +231,7 @@ fun Titulo1(modifier: Modifier) {
 }
 
 @Composable
-fun LogoImage(modifier: Modifier) {
+fun LogoImageLogin(modifier: Modifier) {
     Image(painter = painterResource(R.drawable.logofinal ),
         contentDescription = null,
         modifier = modifier
