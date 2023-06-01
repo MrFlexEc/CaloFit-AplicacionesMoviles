@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.calofitv2.R
+import com.example.calofitv2.calofit.ViewModels.LoginViewModel
 import com.example.calofitv2.calofit.navigation.AppScreen
 import com.example.calofitv2.ui.theme.greencolor
 import com.example.calofitv2.ui.theme.greentext
@@ -35,21 +36,21 @@ private val auth by lazy {
     Firebase.auth
 }
 @Composable
-fun LoginScreen(navController: NavController, auth: FirebaseAuth){
+fun LoginScreen(navController: NavController, auth: FirebaseAuth, viewModel: LoginViewModel){
 
     Box(
         Modifier
             .fillMaxSize()
             .padding(16.dp),
 
-    ){
+        ){
         //Se crea el login y se centra los elementos
-        LoginInterface(Modifier.align(Alignment.TopCenter),navController, auth)
+        LoginInterface(Modifier.align(Alignment.TopCenter),navController, auth,viewModel)
     }
 }
 
 @Composable
-fun LoginInterface(modifier: Modifier, navController: NavController, auth: FirebaseAuth) {
+fun LoginInterface(modifier: Modifier, navController: NavController, auth: FirebaseAuth, viewModel: LoginViewModel) {
 
     Column(horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement =Arrangement.Center,modifier = modifier) {
@@ -61,10 +62,10 @@ fun LoginInterface(modifier: Modifier, navController: NavController, auth: Fireb
         Spacer(modifier = Modifier.padding(5.dp))
         Subtitulo2Login(Modifier.align(Alignment.CenterHorizontally))
         Spacer(modifier = Modifier.padding(15.dp))
-        DatosInicioSesion(navController)
+        DatosInicioSesion(viewModel,navController)
         //EmailDoctor()
 
-       //ContrasenaDoctor()
+        //ContrasenaDoctor()
 
         //BtnIniciarSesion()
     }
@@ -73,19 +74,21 @@ fun LoginInterface(modifier: Modifier, navController: NavController, auth: Fireb
 }
 
 @Composable
-fun DatosInicioSesion(navController: NavController) {
-    val passwordValue = remember { mutableStateOf("")}
+fun DatosInicioSesion( viewModel: LoginViewModel, navController: NavController) {
+    val state =viewModel.state
+    //val passwordValue = remember { mutableStateOf("")}
     val passwordVisibility  = remember { mutableStateOf(false)}
-    val emailValue = remember { mutableStateOf("") }
+    //val emailValue = remember { mutableStateOf("") }
     val isEmailValid by derivedStateOf {
-        Patterns.EMAIL_ADDRESS.matcher(emailValue.value).matches()
+        Patterns.EMAIL_ADDRESS.matcher(state.email).matches()
     }
     val isPasswordValid by derivedStateOf {
-        passwordValue.value.length>5
+
+        state.password.length>5
     }
     OutlinedTextField(
-        value = emailValue.value,
-        onValueChange = {emailValue.value=it},
+        value = state.email,
+        onValueChange = {viewModel.ObtenerEmail(it)},
         label = { Text(text = "Usuario")},
         placeholder = { Text(text = "Usuario")},
         singleLine =  true,
@@ -106,7 +109,9 @@ fun DatosInicioSesion(navController: NavController) {
         leadingIcon = {
             Icon(painter = painterResource(id = R.drawable.doctor),
                 contentDescription = null,
-                modifier = Modifier.padding(end=2.dp).size(25.dp,25.dp)
+                modifier = Modifier
+                    .padding(end = 2.dp)
+                    .size(25.dp, 25.dp)
             )
         }
     )
@@ -114,8 +119,8 @@ fun DatosInicioSesion(navController: NavController) {
     Spacer(modifier = Modifier.padding(8.dp))
 
     OutlinedTextField(
-        value = passwordValue.value,
-        onValueChange = {passwordValue.value=it},
+        value = state.password,
+        onValueChange = {viewModel.ObtenerPassword(it)},
         label = { Text(text = "Contraseña")},
         placeholder = { Text(text = "Contraseña")},
         singleLine =  true,
@@ -130,7 +135,9 @@ fun DatosInicioSesion(navController: NavController) {
         leadingIcon = {
             Icon(painter = painterResource(id = R.drawable.candado),
                 contentDescription = null,
-                modifier = Modifier.padding(end=2.dp).size(25.dp,25.dp)
+                modifier = Modifier
+                    .padding(end = 2.dp)
+                    .size(25.dp, 25.dp)
             )
         },
         isError = !isPasswordValid,
@@ -157,17 +164,8 @@ fun DatosInicioSesion(navController: NavController) {
 
     Spacer(modifier = Modifier.padding(16.dp))
 
-    Button(onClick = {
-        auth.signInWithEmailAndPassword(emailValue.value,passwordValue.value )
-            .addOnCompleteListener{task->
-                if(task.isSuccessful){
-                    Log.d("Ingresaste","Bien hecho")
-                    navController.navigate(route = AppScreen.Inicio.route)
-                }
-                else{
-                    Log.d("No Ingresaste","mmmmmmm ${task.result.toString()}")
-                }
-            }
+    Button(onClick = {viewModel.Login(navController, auth)
+
     },
         // enabled = emailValue.length > 2,
         modifier = Modifier
