@@ -66,23 +66,21 @@ fun AgregarPlatoInterface(modifier: Modifier){
         verticalArrangement =Arrangement.Center,modifier = modifier) {
 
         Spacer(modifier = Modifier.padding(10.dp))
-        AgregarImagen()
+        AgregarImagenPlato()
         Spacer(modifier = Modifier.padding(15.dp))
         NombrePlato()
-        //AgregarImagen()
         Spacer(modifier = Modifier.padding(15.dp))
         DescripcionPlato()
-        //BtnSleccionImagen()
         Spacer(modifier = Modifier.padding(15.dp))
         CaloriasPlato()
         Spacer(modifier = Modifier.padding(25.dp))
-        btnGuardar()
+        btnGuardarPlato()
 
 
     }
 }
 @Composable
-fun btnGuardar() {
+fun btnGuardarPlato() {
     Button(
         onClick = {  },
         colors = ButtonDefaults.buttonColors(
@@ -164,7 +162,7 @@ fun DescripcionPlato(){
 
 
 @Composable
-fun BtnSleccionImagen() {
+fun BtnSleccionImagenPlato() {
     Button(
         onClick = {  },
         colors = ButtonDefaults.buttonColors(
@@ -193,7 +191,7 @@ fun BtnSleccionImagen() {
 }
 
 @Composable
-fun AgregarImagen() {
+fun AgregarImagenPlato() {
     Image(painter = painterResource(R.drawable.logofinal)
         , contentDescription =""
         ,modifier = Modifier
