@@ -70,15 +70,15 @@ fun AgregarPacienteInterface(modifier: Modifier){
 
         Spacer(modifier = Modifier.padding(10.dp))
         AgregarImagenPaciente()
-        Spacer(modifier = Modifier.padding(15.dp))
+        Spacer(modifier = Modifier.padding(8.dp))
         NombrePaciente()
-        Spacer(modifier = Modifier.padding(15.dp))
+        Spacer(modifier = Modifier.padding(8.dp))
         CedulaPaciente()
-        Spacer(modifier = Modifier.padding(15.dp))
+        Spacer(modifier = Modifier.padding(8.dp))
         EdadPaciente()
-        Spacer(modifier = Modifier.padding(15.dp))
+        Spacer(modifier = Modifier.padding(8.dp))
         AlturaPaciente()
-        Spacer(modifier = Modifier.padding(25.dp))
+        Spacer(modifier = Modifier.padding(8.dp))
         btnGuardarPaciente()
 
 
