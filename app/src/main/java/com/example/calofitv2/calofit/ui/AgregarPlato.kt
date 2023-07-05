@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -15,14 +16,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.calofitv2.R
+import com.example.calofitv2.calofit.ViewModels.PlatoViewModel
 import com.example.calofitv2.calofit.navigation.AppScreen
 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun AgregarPlatoScreen(navController: NavController){
+fun AgregarPlatoScreen(navController: NavController,viewModel: PlatoViewModel= hiltViewModel()){
     Scaffold(topBar = {
         TopAppBar(backgroundColor = Color(0xFF97DF6D)
         ) {
@@ -53,14 +56,14 @@ fun AgregarPlatoScreen(navController: NavController){
                 .padding(8.dp),
         ){
             //Se crea el login y se centra los elementos
-            AgregarPlatoInterface(Modifier.align(Alignment.TopCenter))
+            AgregarPlatoInterface(Modifier.align(Alignment.TopCenter), viewModel)
         }
 
     }
 }
 
 @Composable
-fun AgregarPlatoInterface(modifier: Modifier){
+fun AgregarPlatoInterface(modifier: Modifier,viewModel: PlatoViewModel){
 
     Column(horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement =Arrangement.Center,modifier = modifier) {
@@ -68,47 +71,74 @@ fun AgregarPlatoInterface(modifier: Modifier){
         Spacer(modifier = Modifier.padding(10.dp))
         AgregarImagenPlato()
         Spacer(modifier = Modifier.padding(15.dp))
-        NombrePlato()
+        NombrePlato(viewModel)
         Spacer(modifier = Modifier.padding(15.dp))
-        DescripcionPlato()
+        DescripcionPlato(viewModel)
         Spacer(modifier = Modifier.padding(15.dp))
-        CaloriasPlato()
+        CaloriasPlato(viewModel)
         Spacer(modifier = Modifier.padding(25.dp))
-        btnGuardarPlato()
+        btnGuardarPlato(viewModel)
 
 
     }
 }
 @Composable
-fun btnGuardarPlato() {
+fun btnGuardarPlato(viewModel: PlatoViewModel) {
+    var show by rememberSaveable{ mutableStateOf(false)}
     Button(
-        onClick = {  },
+        onClick = {viewModel.GuardarPlato() ;show=true },
         colors = ButtonDefaults.buttonColors(
             backgroundColor = Color(0xFF97DF6D)
         ),
         shape = RoundedCornerShape(25),
-        modifier = Modifier.height(40.dp).width(200.dp)
+        modifier = Modifier
+            .height(40.dp)
+            .width(200.dp)
 
     ) {
         Text(
             text = "Guardar",
             fontSize = 15.sp,
             color = Color.White,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .wrapContentSize(align = Alignment.Center),
             textAlign = TextAlign.Start,
             // modifier = Modifier.padding(start = 10.dp)
             //.wrapContentSize(align = Alignment.CenterStart)
         )
     }
+    DialogoGuardado(show, { },{show=false})
 }
 
 @Composable
-fun NombrePlato() {
-    var nombrePlato by remember { mutableStateOf("") }
+fun DialogoGuardado(
+    show:Boolean,
+    onDismiss: ()->Unit,
+    onConfirm: ()->Unit
+
+){
+    if(show){
+        AlertDialog(onDismissRequest = { onDismiss() },
+            confirmButton = {
+                Button(onClick = { onConfirm()}) {
+                    Text(text = "Aceptar")
+                }},
+            title = { Text(text = "Calofit", fontSize = 15.sp, color=Color.Black,textAlign = TextAlign.Center)},
+            text = { Text(text = "El plato se ha ingresado correctamente")}
+        )
+    }
+
+
+}
+
+
+@Composable
+fun NombrePlato(viewModel: PlatoViewModel) {
+    val state = viewModel.state
     OutlinedTextField(
-        value = nombrePlato,
-        onValueChange = {nombrePlato=it},
+        value = state.NombrePlato,
+        onValueChange = {viewModel.NombrePlato(it)},
         label = { Text(text = "Nombre")},
         placeholder = { Text(text = "Nombre")},
         singleLine =  true,
@@ -123,11 +153,11 @@ fun NombrePlato() {
 }
 
 @Composable
-fun CaloriasPlato() {
-    var caloriasPlato by remember { mutableStateOf("") }
+fun CaloriasPlato(viewModel: PlatoViewModel) {
+    val state = viewModel.state
     OutlinedTextField(
-        value = caloriasPlato,
-        onValueChange = {caloriasPlato=it},
+        value = state.CaloriasPlato,
+        onValueChange = {viewModel.CaloriasPlato(it)},
         label = { Text(text = "Calorias")},
         placeholder = { Text(text = "Calorias")},
         singleLine =  true,
@@ -141,11 +171,11 @@ fun CaloriasPlato() {
         ))
 }
 @Composable
-fun DescripcionPlato(){
-    var descripcionPlato by remember { mutableStateOf("") }
+fun DescripcionPlato(viewModel: PlatoViewModel){
+    val state = viewModel.state
     OutlinedTextField(
-        value = descripcionPlato,
-        onValueChange = {descripcionPlato=it},
+        value = state.DescripcionPlato,
+        onValueChange = {viewModel.DescripcionPlato(it)},
         label = { Text(text = "Descripción")},
         placeholder = { Text(text = "Descripción")},
         singleLine =  true,
@@ -161,34 +191,6 @@ fun DescripcionPlato(){
 
 
 
-@Composable
-fun BtnSleccionImagenPlato() {
-    Button(
-        onClick = {  },
-        colors = ButtonDefaults.buttonColors(
-            backgroundColor = Color(0xFF97DF6D)
-        ),
-        shape = RoundedCornerShape(25),
-        modifier = Modifier
-            .height(40.dp)
-            .width(220.dp)
-
-    ) {
-        Text(
-            text = "SELECCIONAR IMAGEN",
-            fontSize = 15.sp,
-            color = Color.White,
-            modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentSize(align = Alignment.Center),
-            //textAlign = TextAlign.Start,
-            // modifier = Modifier.padding(start = 10.dp)
-            //.wrapContentSize(align = Alignment.CenterStart)
-        )
-
-
-    }
-}
 
 @Composable
 fun AgregarImagenPlato() {
