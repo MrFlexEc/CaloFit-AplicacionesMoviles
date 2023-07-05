@@ -1,4 +1,4 @@
-package com.example.calofitv2.calofit.data.PacienteFit
+package com.example.calofitv2.calofit.data.DataFit
 
 data class Paciente(
     val NombrePaciente: String = "",

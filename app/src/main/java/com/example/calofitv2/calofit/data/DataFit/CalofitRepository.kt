@@ -1,7 +1,9 @@
-package com.example.calofitv2.calofit.data.PacienteFit
+package com.example.calofitv2.calofit.data.DataFit
+
+import javax.inject.Inject
 
 
-class PacienteRepository(
+class PacienteRepository @Inject constructor(
    private val pacientedao:PacienteDao
 ) {
 
@@ -16,10 +18,6 @@ class PacienteRepository(
     }
     */
 
-
-
-
-
     suspend fun InsertPaciente (paciente:Paciente){
         val Entity = PacienteEntity(Nombre = paciente.NombrePaciente
             , Cedula = paciente.CedulaPaciente
@@ -28,10 +26,6 @@ class PacienteRepository(
         )
         return pacientedao.insertPacientedb(Entity)
     }
-
-
-
-
 
 /*
 suspend fun ObtenerPacientes():List<Paciente>{
@@ -50,4 +44,19 @@ suspend fun ObtenerPacientes():List<Paciente>{
 
 //interface PacienteRepository {
   //  fun InsertPacientetoRoom (paciente:Paciente)
+}
+
+class PlatoRepository @Inject constructor (
+    private val platodao: PlatoDao
+) {
+
+    suspend fun Insertplato (plato: Plato){
+        val Entity = PlatoEntity(Nombre = plato.NombrePlato
+            , Descripcion = plato.DescripcionPlato
+            , Calorias = plato.CaloriasPlato.toInt()
+
+        )
+        return platodao.insertPlatodb(Entity)
+    }
+
 }

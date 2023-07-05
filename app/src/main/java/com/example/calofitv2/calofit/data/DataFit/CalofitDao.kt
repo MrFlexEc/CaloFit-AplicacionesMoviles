@@ -1,4 +1,4 @@
-package com.example.calofitv2.calofit.data.PacienteFit
+package com.example.calofitv2.calofit.data.DataFit
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -15,6 +15,20 @@ interface PacienteDao {
 
 
    // @Query("SELECT * FROM TvEntity Where Nombre = :idnombre")
+    //suspend fun getOneTv(idnombre:String): PacienteEntity
+}
+
+@Dao
+interface PlatoDao {
+
+    @Insert(onConflict = IGNORE)
+    fun insertPlatodb(plato: PlatoEntity)
+
+    // @Query("SELECT * FROM PacienteEntity")
+    //suspend fun getAllPaciente():List<PacienteEntity>
+
+
+    // @Query("SELECT * FROM TvEntity Where Nombre = :idnombre")
     //suspend fun getOneTv(idnombre:String): PacienteEntity
 
 
