@@ -1,5 +1,6 @@
 package com.example.calofitv2.calofit.ui
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.util.Patterns
 import androidx.compose.foundation.Image
@@ -30,13 +31,13 @@ import com.example.calofitv2.ui.theme.greentext
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-
+import androidx.hilt.navigation.compose.hiltViewModel
 
 private val auth by lazy {
     Firebase.auth
 }
 @Composable
-fun LoginScreen(navController: NavController, auth: FirebaseAuth, viewModel: LoginViewModel){
+fun LoginScreen(navController: NavController, auth: FirebaseAuth, viewModel: LoginViewModel= hiltViewModel()){
 
     Box(
         Modifier
@@ -73,6 +74,7 @@ fun LoginInterface(modifier: Modifier, navController: NavController, auth: Fireb
 
 }
 
+@SuppressLint("UnrememberedMutableState")
 @Composable
 fun DatosInicioSesion( viewModel: LoginViewModel, navController: NavController) {
     val state =viewModel.state
