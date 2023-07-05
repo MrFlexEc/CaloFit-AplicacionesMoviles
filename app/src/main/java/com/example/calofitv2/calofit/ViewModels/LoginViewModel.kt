@@ -7,14 +7,20 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
+import com.example.calofitv2.calofit.data.PacienteFit.Paciente
+import com.example.calofitv2.calofit.data.PacienteFit.PacienteRepository
 import com.example.calofitv2.calofit.navigation.AppScreen
 import com.google.android.play.core.integrity.e
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import javax.inject.Inject
 
-
-class LoginViewModel:ViewModel() {
+@HiltViewModel
+class LoginViewModel @Inject constructor(
+   // private val Repository: PacienteRepository
+):ViewModel() {
     var state by mutableStateOf(LoginState())
         private set
 
@@ -42,5 +48,46 @@ class LoginViewModel:ViewModel() {
             }
         }
         }
+
+/*
+    //PACIENTE
+    var stateP by mutableStateOf(PacienteState())
+        private set
+
+    fun NombrePaciente(nombre:String){
+        stateP = stateP.copy(
+            NombrePaciente = nombre
+        )
+    }
+
+    fun CedulaPaciente(cedula:String){
+        stateP = stateP.copy(
+            CedulaPaciente = cedula
+        )
+    }
+    fun EdadPaciente(edad:String){
+        stateP = stateP.copy(
+            EdadPaciente = edad
+        )
+    }
+    fun AlturaPaciente(altura:String){
+        stateP = stateP.copy(
+            AlturaPaciente = altura
+        )
+    }
+
+    fun GuardarPaciente(){
+        val paciente = Paciente(
+            NombrePaciente = stateP.NombrePaciente,
+            CedulaPaciente = stateP.CedulaPaciente,
+            EdadPaciente = stateP.EdadPaciente,
+            AlturaPaciente = stateP.AlturaPaciente
+        )
+        viewModelScope.launch {
+            Repository.InsertPaciente(paciente)
+        }
+    }
+
+    */
     }
 
