@@ -5,8 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.calofitv2.calofit.data.PacienteFit.Paciente
-import com.example.calofitv2.calofit.data.PacienteFit.PacienteRepository
+import com.example.calofitv2.calofit.data.DataFit.Paciente
+import com.example.calofitv2.calofit.data.DataFit.PacienteRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

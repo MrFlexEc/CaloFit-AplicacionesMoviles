@@ -1,6 +1,6 @@
 package com.example.calofitv2.calofit.ViewModels
 
-import com.example.calofitv2.calofit.data.PacienteFit.Paciente
+import com.example.calofitv2.calofit.data.DataFit.Paciente
 
 data class PacienteState(
 

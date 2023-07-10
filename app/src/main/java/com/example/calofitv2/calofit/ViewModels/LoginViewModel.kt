@@ -7,8 +7,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
-import com.example.calofitv2.calofit.data.PacienteFit.Paciente
-import com.example.calofitv2.calofit.data.PacienteFit.PacienteRepository
+import com.example.calofitv2.calofit.data.DataFit.Paciente
+import com.example.calofitv2.calofit.data.DataFit.PacienteRepository
 import com.example.calofitv2.calofit.navigation.AppScreen
 import com.google.android.play.core.integrity.e
 import com.google.firebase.auth.FirebaseAuth

@@ -15,8 +15,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.room.Room
 import com.example.calofitv2.calofit.ViewModels.LoginViewModel
 import com.example.calofitv2.calofit.ViewModels.PacienteViewModel
-import com.example.calofitv2.calofit.data.Database.PacienteDatabase
-import com.example.calofitv2.calofit.data.PacienteFit.PacienteRepository
+import com.example.calofitv2.calofit.data.Database.AppDatabase
+import com.example.calofitv2.calofit.data.DataFit.PacienteRepository
 import com.example.calofitv2.calofit.navigation.AppNavigation
 import com.example.calofitv2.ui.theme.CaloFitv2Theme
 import dagger.hilt.android.AndroidEntryPoint
