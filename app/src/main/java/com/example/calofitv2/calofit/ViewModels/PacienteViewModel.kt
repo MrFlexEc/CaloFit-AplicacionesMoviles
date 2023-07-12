@@ -19,9 +19,10 @@ class PacienteViewModel @Inject constructor  (
     var state by mutableStateOf(PacienteState())
         private set
 
+    /*
     init {
         Repository.
-    }
+    }*/
 
     fun NombrePaciente(nombre:String){
         state = state.copy(
