@@ -1,19 +1,21 @@
 package com.example.calofitv2.calofit.data.DataFit
 
-import androidx.room.Dao
-import androidx.room.Insert
+import androidx.room.*
 import androidx.room.OnConflictStrategy.Companion.IGNORE
-import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PacienteDao {
 
-    @Insert(onConflict = IGNORE)
+   // @Insert(onConflict = IGNORE)
+   @Insert(onConflict = OnConflictStrategy.REPLACE)
      fun insertPacientedb(paciente: PacienteEntity)
 
     @Query("SELECT * FROM PacienteEntity")
-    suspend fun getAllPaciente():List<PacienteEntity>
+     fun getAllPaciente(): Flow<List<PacienteEntity>>
 
+     @Delete
+     suspend fun DeletePaciente(paciente: PacienteEntity)
 
    // @Query("SELECT * FROM TvEntity Where Nombre = :idnombre")
     //suspend fun getOneTv(idnombre:String): PacienteEntity

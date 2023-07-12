@@ -154,19 +154,27 @@ fun DialogoGuardado2(
 
 
 @Composable
-fun Pacientemenu() {
-    //var menuPaciente by remember { mutableStateOf("") }
-    //val state = viewModel.state
+fun Pacientemenu(
+    viewModel: RegistroViewModel= hiltViewModel(),
+    viewModel2: PacienteViewModel = hiltViewModel(),
+) {
+
+    val state = viewModel.state
+    val state2 = viewModel2.state
+    val pacientesLt = state2.Pacientes
+    var selectedPacienteIndex by remember { mutableStateOf(0) }
+
     //Estado para determinar si se despliega o no
     var expanded by remember { mutableStateOf(false) }
     //Estado inicial del item seleccionado
     var selectedItem by remember { mutableStateOf("Paciente") }
     //Lista auxiliar para mostrar datos
-    val menuItems = listOf("Opcion 1", "Opcion 2", "Opcion 3")
+    // val menuItems = listOf("Opcion 1", "Opcion 2", "Opcion 3")
 
-    Box(Modifier
-        .background(color = Color(0xFFECEDC1))
-        .fillMaxWidth()
+    Box(
+        Modifier
+            .background(color = Color(0xFFECEDC1))
+            .fillMaxWidth()
     ) {
         Text(
             text = selectedItem,
@@ -181,23 +189,39 @@ fun Pacientemenu() {
             //expanded apuntando a la propiedad
             expanded = expanded,
             //Metodo para replegar el DropDownMenu
-            onDismissRequest = { expanded = false },
+            onDismissRequest = {  },
         ) {
+
             //For each para mostrar los items
-            menuItems.forEach{menuItem ->
+            pacientesLt.forEachIndexed {index, paciente ->
                 DropdownMenuItem(onClick = {
                     //Asignacion de variable y estado del expanded
-                    selectedItem = menuItem
-                    expanded = false
+                    selectedPacienteIndex = index
+                    viewModel.PacienteN(paciente.idpaciente)
                 }) {
                     //En el texto mostramos el item seleccionado
-                    Text(text = menuItem)
+                    Text(paciente.NombrePaciente)
                 }
 
             }
         }
     }
 
+    /*
+    OutlinedTextField(
+        value = state.NombrePaciente,
+        onValueChange = {viewModel.NombrePaciente(it)},
+        label = { Text(text = "Nombre")},
+        placeholder = { Text(text = "Nombre")},
+        singleLine =  true,
+        modifier = Modifier
+            .fillMaxWidth()
+        ,
+        colors = TextFieldDefaults.textFieldColors(
+            backgroundColor = Color(0xFFECEDC1),
+            placeholderColor = Color.Black,
+            focusedLabelColor = Color.Black
+        ))*/
 }
 
 @Composable

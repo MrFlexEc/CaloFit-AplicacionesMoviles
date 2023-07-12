@@ -1,5 +1,8 @@
 package com.example.calofitv2.calofit.data.DataFit
 
+import com.example.calofitv2.calofit.ui.Pacientemenu
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 
@@ -7,36 +10,36 @@ class PacienteRepository @Inject constructor(
    private val pacientedao:PacienteDao
 ) {
 
+    suspend fun InsertPaciente (paciente:Paciente){
+        val Entity = PacienteEntity(Nombre = paciente.NombrePaciente
+            , Cedula = paciente.CedulaPaciente
+            , Edad = paciente.EdadPaciente.toInt()
+            , Altura =  paciente.AlturaPaciente.toInt()
+        )
+        return pacientedao.insertPacientedb(Entity)
+    }
+
     /*
-    suspend fun InsertPaciente (paciente:Paciente){
-        val Entity = PacienteEntity(Nombre = paciente.NombrePaciente
-            , Cedula = paciente.CedulaPaciente
-            , Edad = paciente.EdadPaciente.toInt()
-            , Altura =  paciente.AlturaPaciente.toInt()
-        )
-        return pacientedao.insertPacientedb(Entity)
-    }
-    */
+    suspend fun getPacientes():List<Paciente>{
+        val entities=userDao.getallUsers()
+        return entities.map {
+            User(
+                name=it.name
+            )
+        }
+    }*/
 
-    suspend fun InsertPaciente (paciente:Paciente){
-        val Entity = PacienteEntity(Nombre = paciente.NombrePaciente
-            , Cedula = paciente.CedulaPaciente
-            , Edad = paciente.EdadPaciente.toInt()
-            , Altura =  paciente.AlturaPaciente.toInt()
-        )
-        return pacientedao.insertPacientedb(Entity)
-    }
+    /*
 
-/*
-suspend fun ObtenerPacientes():List<Paciente>{
-    val entities = tvpaciente.getAllPaciente()
+  suspend fun ObtenerPacientes(): Flow<List<Paciente>> {
+    val entities = pacientedao.getAllPaciente()
     return entities.map {
-        Paciente(
-            NombrePaciente = it.Nom,
-            CedulaPaciente = it.Informacion,
-            EdadPaciente = it.Precio,
-            AlturaPaciente = = it.Precio
-    }
+        PacienteEntity(
+            Nombre = it.Nombre,
+
+
+        )
+
 }*/
 
 
@@ -74,5 +77,7 @@ class RegistroRepository @Inject constructor (
         )
         return registrodao.insertRegistrodb(Entity)
     }
+
+
 
 }
