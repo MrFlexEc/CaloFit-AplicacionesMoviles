@@ -26,16 +26,17 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.calofitv2.R
 import com.example.calofitv2.calofit.ViewModels.PacienteViewModel
+import com.example.calofitv2.calofit.ViewModels.RegistroViewModel
 import com.example.calofitv2.calofit.navigation.AppScreen
 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun AgregarRegistroScreen(navController: NavController){
+fun AgregarRegistroScreen(navController: NavController,viewModel: RegistroViewModel = hiltViewModel()){
     Scaffold(
         topBar = {
-        TopAppBar(backgroundColor = Color(0xFF97DF6D)
-        )   {
+            TopAppBar(backgroundColor = Color(0xFF97DF6D)
+            )   {
                 Image(painter = painterResource(R.drawable.inicioicon)
                     , contentDescription = ""
                     , modifier = Modifier
@@ -64,7 +65,7 @@ fun AgregarRegistroScreen(navController: NavController){
                 .padding(8.dp),
         ){
             //Se crea el login y se centra los elementos
-            AgregarRegistroInterface(Modifier.align(Alignment.TopCenter))
+            AgregarRegistroInterface(Modifier.align(Alignment.TopCenter),viewModel)
         }
 
     }
@@ -72,7 +73,7 @@ fun AgregarRegistroScreen(navController: NavController){
 
 //parte Inter7az
 @Composable
-fun AgregarRegistroInterface(modifier: Modifier){
+fun AgregarRegistroInterface(modifier: Modifier,viewModel: RegistroViewModel){
     //var show by rememberSaveable{ mutableStateOf(false)}
     Column(horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement =Arrangement.Center,modifier = modifier) {
@@ -86,7 +87,7 @@ fun AgregarRegistroInterface(modifier: Modifier){
         Spacer(modifier = Modifier.padding(8.dp))
         FechaRegistro()
         Spacer(modifier = Modifier.padding(8.dp))
-        PorcionesRegistro()
+        PorcionesRegistro(viewModel)
         Spacer(modifier = Modifier.padding(15.dp))
         btnGuardarRegistro()
 
@@ -100,7 +101,7 @@ fun AgregarRegistroInterface(modifier: Modifier){
 fun btnGuardarRegistro() {
 
     var show by rememberSaveable{ mutableStateOf(false)}
-   // viewModel.GuardarPaciente();show=true
+    // viewModel.GuardarPaciente();show=true
     Button(
         onClick = { show=true },
         colors = ButtonDefaults.buttonColors(
@@ -170,8 +171,8 @@ fun Pacientemenu() {
         Text(
             text = selectedItem,
             modifier = Modifier
-                    //Metodo CLICKABLE para desplegar el DropDownMenu
-                    //puedes hacerlo con un BUTTON
+                //Metodo CLICKABLE para desplegar el DropDownMenu
+                //puedes hacerlo con un BUTTON
                 .clickable { expanded = true }
                 .padding(16.dp)
                 .fillMaxWidth()
@@ -197,21 +198,6 @@ fun Pacientemenu() {
         }
     }
 
-    /*
-    OutlinedTextField(
-        value = state.NombrePaciente,
-        onValueChange = {viewModel.NombrePaciente(it)},
-        label = { Text(text = "Nombre")},
-        placeholder = { Text(text = "Nombre")},
-        singleLine =  true,
-        modifier = Modifier
-            .fillMaxWidth()
-        ,
-        colors = TextFieldDefaults.textFieldColors(
-            backgroundColor = Color(0xFFECEDC1),
-            placeholderColor = Color.Black,
-            focusedLabelColor = Color.Black
-        ))*/
 }
 
 @Composable
@@ -276,7 +262,7 @@ fun Platomenu() {
 }
 @Composable
 fun FechaRegistro(){
-   // val state = viewModel.state
+    // val state = viewModel.state
     var fecharegistro by remember { mutableStateOf("") }
     OutlinedTextField(
         value = fecharegistro,
@@ -299,12 +285,12 @@ fun FechaRegistro(){
 
 
 @Composable
-fun PorcionesRegistro(){
-    var porciones by remember { mutableStateOf("") }
-    //val state = viewModel.state
+fun PorcionesRegistro(viewModel: RegistroViewModel){
+    //var porciones by remember { mutableStateOf("") }
+    val state = viewModel.state
     OutlinedTextField(
-        value = porciones,
-        onValueChange = {porciones=it},
+        value = state.Porciones,
+        onValueChange = {viewModel.Porciones(it)},
         label = { Text(text = "Porciones")},
         placeholder = { Text(text = "Porciones")},
         singleLine =  true,

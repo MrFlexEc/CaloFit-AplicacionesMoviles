@@ -46,7 +46,9 @@ class PacienteViewModel @Inject constructor  (
             NombrePaciente = state.NombrePaciente,
             CedulaPaciente = state.CedulaPaciente,
             EdadPaciente = state.EdadPaciente,
-            AlturaPaciente = state.AlturaPaciente
+            AlturaPaciente = state.AlturaPaciente,
+            idpaciente = state.idpaciente
+
         )
         viewModelScope.launch {
             Repository.InsertPaciente(paciente)
@@ -57,3 +59,4 @@ class PacienteViewModel @Inject constructor  (
 
 
 }
+

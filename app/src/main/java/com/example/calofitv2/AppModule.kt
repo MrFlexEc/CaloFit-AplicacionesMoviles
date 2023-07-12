@@ -4,11 +4,9 @@ import android.app.Application
 import androidx.room.Room
 import com.example.calofitv2.calofit.ViewModels.PacienteViewModel
 import com.example.calofitv2.calofit.ViewModels.PlatoViewModel
+import com.example.calofitv2.calofit.ViewModels.RegistroViewModel
+import com.example.calofitv2.calofit.data.DataFit.*
 import com.example.calofitv2.calofit.data.Database.AppDatabase
-import com.example.calofitv2.calofit.data.DataFit.PacienteDao
-import com.example.calofitv2.calofit.data.DataFit.PacienteRepository
-import com.example.calofitv2.calofit.data.DataFit.PlatoDao
-import com.example.calofitv2.calofit.data.DataFit.PlatoRepository
 
 
 import dagger.Module
@@ -42,6 +40,10 @@ object AppModule {
     fun providePlatoDao(database: AppDatabase): PlatoDao {
         return database.Pladao()
     }
+    @Provides
+    fun provideRegistroDao(database: AppDatabase): RegistroDao {
+        return database.Regidao()
+    }
 
 
 
@@ -57,6 +59,14 @@ object AppModule {
         return PlatoRepository(platodao)
     }
 
+    @Provides
+    @Singleton
+    fun provideRegistroRepository(registrodao:RegistroDao): RegistroRepository{
+        return RegistroRepository(registrodao)
+    }
+
+
+
 
     @Provides
     @Singleton
@@ -68,6 +78,11 @@ object AppModule {
     @Singleton
     fun providePlatoViewModel(repository: PlatoRepository): PlatoViewModel {
         return PlatoViewModel(repository)
+    }
+    @Provides
+    @Singleton
+    fun provideRegistroViewModel(repository: RegistroRepository): RegistroViewModel {
+        return RegistroViewModel(repository)
     }
 
 }

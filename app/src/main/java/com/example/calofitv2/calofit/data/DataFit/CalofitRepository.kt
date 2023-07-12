@@ -60,3 +60,19 @@ class PlatoRepository @Inject constructor (
     }
 
 }
+
+class RegistroRepository @Inject constructor (
+    private val registrodao: RegistroDao
+) {
+
+    suspend fun Insertregistro (registro: Registro){
+        val Entity = RegistroEntity(PacienteId = registro.PacienteID.toLong()
+            , PlatotId = registro.PlatoID.toLong()
+            , Fecha = registro.Fecha
+            , Porciones = registro.Porciones.toInt()
+
+        )
+        return registrodao.insertRegistrodb(Entity)
+    }
+
+}

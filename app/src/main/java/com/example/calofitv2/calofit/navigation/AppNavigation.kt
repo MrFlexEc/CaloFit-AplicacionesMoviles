@@ -16,8 +16,9 @@ fun AppNavigation(){
     //Esta vaina permite navegar entre aja interfaces
     val navController = rememberNavController()
     NavHost(navController = navController,
-        startDestination =AppScreen.SplashScreen.route
+        //startDestination =AppScreen.SplashScreen.route
        // startDestination =AppScreen.AgregarPaciente.route
+         startDestination =AppScreen.AgregarRegistro.route
 
     ){
         composable(AppScreen.SplashScreen.route){

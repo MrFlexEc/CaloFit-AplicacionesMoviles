@@ -9,7 +9,7 @@ data class PlatoState(
     val DescripcionPlato: String = "",
     val CaloriasPlato: String = "",
 
-    val PlatoLt:List<Plato> = emptyList(),
+    val RegistroLt:List<Plato> = emptyList(),
 
 
     )
