@@ -3,6 +3,7 @@ package com.example.calofitv2.calofit.ui
 import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -31,29 +32,31 @@ import com.example.calofitv2.calofit.navigation.AppScreen
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun AgregarRegistroScreen(navController: NavController){
-    Scaffold(topBar = {
+    Scaffold(
+        topBar = {
         TopAppBar(backgroundColor = Color(0xFF97DF6D)
-        ) {
-            Image(painter = painterResource(R.drawable.inicioicon)
-                , contentDescription = ""
-                , modifier = Modifier
-                    .clickable {
-                        navController.navigate(route = AppScreen.Inicio.route)
+        )   {
+                Image(painter = painterResource(R.drawable.inicioicon)
+                    , contentDescription = ""
+                    , modifier = Modifier
+                        .clickable {
+                            navController.navigate(route = AppScreen.Inicio.route)
 
-                    }
-                    .size(35.dp)
-            )
-            Text(text = "Agregar Registro",
-                fontSize =25.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.White,
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentSize(align = Alignment.Center)
-            )
+                        }
+                        .size(35.dp)
+                )
+                Text(text = "Agregar Registro",
+                    fontSize =25.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentSize(align = Alignment.Center)
+                )
+            }
         }
-    }) {
+    ) {
 
         Box(
             Modifier
@@ -151,17 +154,49 @@ fun DialogoGuardado2(
 
 @Composable
 fun Pacientemenu() {
-    var menuPaciente by remember { mutableStateOf("") }
+    //var menuPaciente by remember { mutableStateOf("") }
     //val state = viewModel.state
+    //Estado para determinar si se despliega o no
+    var expanded by remember { mutableStateOf(false) }
+    //Estado inicial del item seleccionado
+    var selectedItem by remember { mutableStateOf("Paciente") }
+    //Lista auxiliar para mostrar datos
+    val menuItems = listOf("Opcion 1", "Opcion 2", "Opcion 3")
 
-    DropdownMenu(
-        expanded = true
-        , onDismissRequest = { /*TODO*/ },
-        modifier = Modifier
-            .fillMaxWidth(),
+    Box(Modifier
+        .background(color = Color(0xFFECEDC1))
+        .fillMaxWidth()
+    ) {
+        Text(
+            text = selectedItem,
+            modifier = Modifier
+                    //Metodo CLICKABLE para desplegar el DropDownMenu
+                    //puedes hacerlo con un BUTTON
+                .clickable { expanded = true }
+                .padding(16.dp)
+                .fillMaxWidth()
+        )
+        DropdownMenu(
+            //expanded apuntando a la propiedad
+            expanded = expanded,
+            //Metodo para replegar el DropDownMenu
+            onDismissRequest = { expanded = false },
         ) {
+            //For each para mostrar los items
+            menuItems.forEach{menuItem ->
+                DropdownMenuItem(onClick = {
+                    //Asignacion de variable y estado del expanded
+                    selectedItem = menuItem
+                    expanded = false
+                }) {
+                    //En el texto mostramos el item seleccionado
+                    Text(text = menuItem)
+                }
 
+            }
+        }
     }
+
     /*
     OutlinedTextField(
         value = state.NombrePaciente,
@@ -181,16 +216,47 @@ fun Pacientemenu() {
 
 @Composable
 fun Platomenu() {
-    var menuPlato by remember { mutableStateOf("") }
-   // val state = viewModel.state
+    //var menuPaciente by remember { mutableStateOf("") }
+    //val state = viewModel.state
+    //Estado para determinar si se despliega o no
+    var expanded by remember { mutableStateOf(false) }
+    //Estado inicial del item seleccionado
+    var selectedItem by remember { mutableStateOf("Plato") }
+    //Lista auxiliar para mostrar datos
+    val menuItems = listOf("Opcion 1", "Opcion 2", "Opcion 3")
 
-    DropdownMenu(
-        expanded = true
-        , onDismissRequest = { /*TODO*/ },
-        modifier = Modifier
-            .fillMaxWidth(),
+    Box(Modifier
+        .background(color = Color(0xFFECEDC1))
+        .fillMaxWidth()
     ) {
+        Text(
+            text = selectedItem,
+            modifier = Modifier
+                //Metodo CLICKABLE para desplegar el DropDownMenu
+                //puedes hacerlo con un BUTTON
+                .clickable { expanded = true }
+                .padding(16.dp)
+                .fillMaxWidth()
+        )
+        DropdownMenu(
+            //expanded apuntando a la propiedad
+            expanded = expanded,
+            //Metodo para replegar el DropDownMenu
+            onDismissRequest = { expanded = false },
+        ) {
+            //For each para mostrar los items
+            menuItems.forEach{menuItem ->
+                DropdownMenuItem(onClick = {
+                    //Asignacion de variable y estado del expanded
+                    selectedItem = menuItem
+                    expanded = false
+                }) {
+                    //En el texto mostramos el item seleccionado
+                    Text(text = menuItem)
+                }
 
+            }
+        }
     }
     /*
     OutlinedTextField(
@@ -227,7 +293,8 @@ fun FechaRegistro(){
             backgroundColor = Color(0xFFECEDC1),
             placeholderColor = Color.Black,
             focusedLabelColor = Color.Black
-        ))
+        )
+    )
 }
 
 

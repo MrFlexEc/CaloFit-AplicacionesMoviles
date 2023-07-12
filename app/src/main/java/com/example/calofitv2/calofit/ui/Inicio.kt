@@ -56,7 +56,8 @@ fun InicioScreen(navController: NavController){
 @Composable
 fun InicioInterface(modifier: Modifier,navController: NavController){
     Column(horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement =Arrangement.Center,modifier = modifier) {
+        verticalArrangement =Arrangement.Center,modifier = modifier)
+    {
         Spacer(modifier = Modifier.padding(20.dp))
         FilaVer(navController)
         Spacer(modifier = Modifier.padding(30.dp))
