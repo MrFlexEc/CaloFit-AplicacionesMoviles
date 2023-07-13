@@ -1,16 +1,12 @@
 package com.example.calofitv2.calofit.ViewModels
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.ViewModel
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
-import com.example.calofitv2.calofit.data.DataFit.Paciente
-import com.example.calofitv2.calofit.data.DataFit.PacienteRepository
 import com.example.calofitv2.calofit.navigation.AppScreen
-import com.google.android.play.core.integrity.e
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

@@ -5,9 +5,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.calofitv2.calofit.data.DataFit.Paciente
+import com.example.calofitv2.calofit.data.DataFit.PacienteEntity
 import com.example.calofitv2.calofit.data.DataFit.PacienteRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,11 +19,18 @@ class PacienteViewModel @Inject constructor  (
         ):ViewModel(){
     var state by mutableStateOf(PacienteState())
         private set
+    private var pacienteSeleccionado: PacienteEntity? = null
 
-    /*
+
     init {
-        Repository.
-    }*/
+        viewModelScope.launch {
+            Repository.getPacientes().collectLatest {
+                state = state.copy(
+                    Pacientes =it
+                )
+            }
+        }
+    }
 
     fun NombrePaciente(nombre:String){
         state = state.copy(
@@ -47,17 +55,64 @@ class PacienteViewModel @Inject constructor  (
     }
 
     fun GuardarPaciente(){
-        val paciente = Paciente(
-            NombrePaciente = state.NombrePaciente,
-            CedulaPaciente = state.CedulaPaciente,
-            EdadPaciente = state.EdadPaciente,
-            AlturaPaciente = state.AlturaPaciente,
-            idpaciente = state.idpaciente
+        val paciente = PacienteEntity(
+            Nombre = state.NombrePaciente,
+            Cedula = state.CedulaPaciente,
+            Edad = state.EdadPaciente.toInt(),
+            Altura = state.AlturaPaciente.toInt()
 
         )
         viewModelScope.launch {
             Repository.InsertPaciente(paciente)
         }
+    }
+
+    fun EliminarPaciente(paciente:PacienteEntity){
+        viewModelScope.launch {
+            Repository.deletearPaciente(paciente)
+        }
+    }
+
+    fun seleccionarPaciente(paciente: PacienteEntity) {
+        pacienteSeleccionado = paciente
+        state = state.copy(
+            NombrePaciente = paciente.Nombre,
+            CedulaPaciente = paciente.Cedula,
+            EdadPaciente = paciente.Edad.toString(),
+            AlturaPaciente = paciente.Altura.toString()
+        )
+    }
+
+    fun ModificarPaciente() {
+        val pacienteSeleccionado = pacienteSeleccionado ?: return
+        val pacienteModificado = PacienteEntity(
+            Id = pacienteSeleccionado.Id,
+            Nombre = state.NombrePaciente,
+            Cedula = state.CedulaPaciente,
+            Edad = state.EdadPaciente.toInt(),
+            Altura = state.AlturaPaciente.toInt()
+        )
+        viewModelScope.launch {
+            Repository.ModificarPaciente(pacienteModificado)
+        }
+        // Restablecer los campos de texto después de la modificación
+        state = state.copy(
+            NombrePaciente = "",
+            CedulaPaciente = "",
+            EdadPaciente = "",
+            AlturaPaciente = ""
+        )
+    }
+
+
+    // Función para cargar los datos de un paciente seleccionado
+    fun cargarPacienteSeleccionado(paciente: PacienteEntity) {
+        state = state.copy(
+            NombrePaciente = paciente.Nombre,
+            CedulaPaciente = paciente.Cedula,
+            EdadPaciente = paciente.Edad.toString(),
+            AlturaPaciente = paciente.Altura.toString()
+        )
     }
 
 

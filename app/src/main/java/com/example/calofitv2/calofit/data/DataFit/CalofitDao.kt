@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 interface PacienteDao {
 
    // @Insert(onConflict = IGNORE)
-   @Insert(onConflict = OnConflictStrategy.REPLACE)
+   @Insert()
      fun insertPacientedb(paciente: PacienteEntity)
 
     @Query("SELECT * FROM PacienteEntity")
@@ -16,6 +16,8 @@ interface PacienteDao {
 
      @Delete
      suspend fun DeletePaciente(paciente: PacienteEntity)
+    @Update
+    suspend fun updatePacientedb(paciente: PacienteEntity)
 
    // @Query("SELECT * FROM TvEntity Where Nombre = :idnombre")
     //suspend fun getOneTv(idnombre:String): PacienteEntity

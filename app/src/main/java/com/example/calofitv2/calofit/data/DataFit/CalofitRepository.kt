@@ -10,24 +10,27 @@ class PacienteRepository @Inject constructor(
    private val pacientedao:PacienteDao
 ) {
 
-    suspend fun InsertPaciente (paciente:Paciente){
-        val Entity = PacienteEntity(Nombre = paciente.NombrePaciente
-            , Cedula = paciente.CedulaPaciente
-            , Edad = paciente.EdadPaciente.toInt()
-            , Altura =  paciente.AlturaPaciente.toInt()
+
+    suspend fun InsertPaciente (paciente:PacienteEntity){
+        val Entity = PacienteEntity(Nombre = paciente.Nombre
+            , Cedula = paciente.Cedula
+            , Edad = paciente.Edad.toInt()
+            , Altura =  paciente.Altura.toInt()
         )
         return pacientedao.insertPacientedb(Entity)
     }
 
-    /*
-    suspend fun getPacientes():List<Paciente>{
-        val entities=userDao.getallUsers()
-        return entities.map {
-            User(
-                name=it.name
-            )
-        }
-    }*/
+    suspend fun deletearPaciente(paciente: PacienteEntity) {
+        return pacientedao.DeletePaciente(paciente)
+    }
+
+    suspend fun ModificarPaciente(paciente: PacienteEntity) {
+        pacientedao.updatePacientedb(paciente)
+    }
+
+     fun getPacientes():Flow<List<PacienteEntity>>{
+        return pacientedao.getAllPaciente()
+    }
 
     /*
 

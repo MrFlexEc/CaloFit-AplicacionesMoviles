@@ -197,10 +197,10 @@ fun Pacientemenu(
                 DropdownMenuItem(onClick = {
                     //Asignacion de variable y estado del expanded
                     selectedPacienteIndex = index
-                    viewModel.PacienteN(paciente.idpaciente)
+                    viewModel.PacienteN(paciente.Id.toString())
                 }) {
                     //En el texto mostramos el item seleccionado
-                    Text(paciente.NombrePaciente)
+                    Text(paciente.Nombre)
                 }
 
             }

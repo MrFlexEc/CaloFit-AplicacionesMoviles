@@ -17,8 +17,8 @@ fun AppNavigation(){
     val navController = rememberNavController()
     NavHost(navController = navController,
         //startDestination =AppScreen.SplashScreen.route
-       // startDestination =AppScreen.AgregarPaciente.route
-         startDestination =AppScreen.AgregarRegistro.route
+       startDestination =AppScreen.Inicio.route
+         //startDestination =AppScreen.AgregarRegistro.route
 
     ){
         composable(AppScreen.SplashScreen.route){
