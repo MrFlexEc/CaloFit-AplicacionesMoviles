@@ -32,39 +32,33 @@ class PacienteRepository @Inject constructor(
         return pacientedao.getAllPaciente()
     }
 
-    /*
 
-  suspend fun ObtenerPacientes(): Flow<List<Paciente>> {
-    val entities = pacientedao.getAllPaciente()
-    return entities.map {
-        PacienteEntity(
-            Nombre = it.Nombre,
-
-
-        )
-
-}*/
-
-
-
-
-//interface PacienteRepository {
-  //  fun InsertPacientetoRoom (paciente:Paciente)
 }
 
 class PlatoRepository @Inject constructor (
     private val platodao: PlatoDao
 ) {
 
-    suspend fun Insertplato (plato: Plato){
-        val Entity = PlatoEntity(Nombre = plato.NombrePlato
-            , Descripcion = plato.DescripcionPlato
-            , Calorias = plato.CaloriasPlato.toInt()
+    suspend fun Insertplato (plato: PlatoEntity){
+        val Entity = PlatoEntity(Nombre = plato.Nombre
+            , Descripcion = plato.Descripcion
+            , Calorias = plato.Calorias.toInt()
 
         )
         return platodao.insertPlatodb(Entity)
     }
 
+    suspend fun deletearPlato(plato: PlatoEntity) {
+        return platodao.DeletePlato(plato)
+    }
+
+    suspend fun ModificarPlato(plato: PlatoEntity) {
+        platodao.updatePlatodb(plato)
+    }
+
+    fun getPlatos():Flow<List<PlatoEntity>>{
+        return platodao.getAllPlato()
+    }
 }
 
 class RegistroRepository @Inject constructor (

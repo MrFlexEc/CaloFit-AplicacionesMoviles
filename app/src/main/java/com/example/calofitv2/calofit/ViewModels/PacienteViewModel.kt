@@ -105,6 +105,8 @@ class PacienteViewModel @Inject constructor  (
     }
 
 
+
+    /*
     // Función para cargar los datos de un paciente seleccionado
     fun cargarPacienteSeleccionado(paciente: PacienteEntity) {
         state = state.copy(
@@ -113,7 +115,7 @@ class PacienteViewModel @Inject constructor  (
             EdadPaciente = paciente.Edad.toString(),
             AlturaPaciente = paciente.Altura.toString()
         )
-    }
+    }*/
 
 
 

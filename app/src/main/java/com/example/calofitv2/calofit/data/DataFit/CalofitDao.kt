@@ -7,8 +7,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface PacienteDao {
 
-   // @Insert(onConflict = IGNORE)
-   @Insert()
+   @Insert(onConflict = IGNORE)
      fun insertPacientedb(paciente: PacienteEntity)
 
     @Query("SELECT * FROM PacienteEntity")
@@ -30,13 +29,12 @@ interface PlatoDao {
     fun insertPlatodb(plato: PlatoEntity)
 
      @Query("SELECT * FROM PlatoEntity")
-    suspend fun getAllPlato():List<PlatoEntity>
+     fun getAllPlato():Flow<List<PlatoEntity>>
 
-
-    // @Query("SELECT * FROM TvEntity Where Nombre = :idnombre")
-    //suspend fun getOneTv(idnombre:String): PacienteEntity
-
-
+    @Delete
+    suspend fun DeletePlato(plato: PlatoEntity)
+    @Update
+    suspend fun updatePlatodb(plato: PlatoEntity)
 
 }
 
