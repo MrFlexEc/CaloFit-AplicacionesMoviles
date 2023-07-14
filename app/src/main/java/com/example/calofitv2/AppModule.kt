@@ -1,6 +1,8 @@
 package com.example.calofitv2
 
 import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.room.Room
 import com.example.calofitv2.calofit.ViewModels.PacienteViewModel
 import com.example.calofitv2.calofit.ViewModels.PlatoViewModel
@@ -84,5 +86,7 @@ object AppModule {
     fun provideRegistroViewModel(repository: RegistroRepository): RegistroViewModel {
         return RegistroViewModel(repository)
     }
+
+
 
 }

@@ -97,20 +97,4 @@ class PlatoViewModel @Inject constructor(
     }
 
 
-    /*
-    // Función para cargar los datos de un plato seleccionado
-    fun cargarPacienteSeleccionado(plato: PlatoEntity) {
-        state = state.copy(
-            NombrePlato = plato.Nombre,
-            DescripcionPlato = plato.Descripcion,
-            CaloriasPlato = plato.Calorias.toString()
-        )
-    }*/
-
-
-
-
-
-
-
 }
