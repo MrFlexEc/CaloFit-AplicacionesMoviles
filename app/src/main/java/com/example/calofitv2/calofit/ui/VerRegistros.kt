@@ -74,12 +74,12 @@ fun VerRegistrosInterface(modifier: Modifier, viewModel: RegistroViewModel) {
         modifier = modifier
     ) {
         TextField(
-            value = state.PacienteID,
+            value = viewModel.pacienteNombre,
             onValueChange = { viewModel.PacienteN(it) },
             placeholder = { Text(text = "Paciente") }
         )
         TextField(
-            value = state.PlatoID,
+            value = viewModel.platoNombre,
             onValueChange = { viewModel.PlatoN(it) },
             placeholder = { Text(text = "Plato") }
         )

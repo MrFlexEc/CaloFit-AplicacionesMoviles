@@ -32,6 +32,10 @@ class PacienteRepository @Inject constructor(
         return pacientedao.getAllPaciente()
     }
 
+    suspend fun getPacienteById(pacienteId: Long): PacienteEntity? {
+        return pacientedao.getPacienteById(pacienteId)
+    }
+
 
 }
 
@@ -58,6 +62,9 @@ class PlatoRepository @Inject constructor (
 
     fun getPlatos():Flow<List<PlatoEntity>>{
         return platodao.getAllPlato()
+    }
+    suspend fun getPlatoById(platoId: Long): PlatoEntity? {
+        return platodao.getPlatoById(platoId)
     }
 }
 

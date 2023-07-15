@@ -17,6 +17,8 @@ interface PacienteDao {
      suspend fun DeletePaciente(paciente: PacienteEntity)
     @Update
     suspend fun updatePacientedb(paciente: PacienteEntity)
+    @Query("SELECT * FROM PacienteEntity WHERE Id = :pacienteId")
+    suspend fun getPacienteById(pacienteId: Long): PacienteEntity?
 
    // @Query("SELECT * FROM TvEntity Where Nombre = :idnombre")
     //suspend fun getOneTv(idnombre:String): PacienteEntity
@@ -35,6 +37,8 @@ interface PlatoDao {
     suspend fun DeletePlato(plato: PlatoEntity)
     @Update
     suspend fun updatePlatodb(plato: PlatoEntity)
+    @Query("SELECT * FROM PlatoEntity WHERE Id = :platoId")
+    suspend fun getPlatoById(platoId: Long): PlatoEntity?
 
 }
 
