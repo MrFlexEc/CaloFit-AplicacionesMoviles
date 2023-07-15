@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 interface PacienteDao {
 
    @Insert(onConflict = IGNORE)
-     fun insertPacientedb(paciente: PacienteEntity)
+    suspend fun insertPacientedb(paciente: PacienteEntity)
 
     @Query("SELECT * FROM PacienteEntity")
      fun getAllPaciente(): Flow<List<PacienteEntity>>
@@ -26,7 +26,7 @@ interface PacienteDao {
 interface PlatoDao {
 
     @Insert(onConflict = IGNORE)
-    fun insertPlatodb(plato: PlatoEntity)
+   suspend fun insertPlatodb(plato: PlatoEntity)
 
      @Query("SELECT * FROM PlatoEntity")
      fun getAllPlato():Flow<List<PlatoEntity>>
@@ -42,14 +42,15 @@ interface PlatoDao {
 interface RegistroDao {
 
     @Insert(onConflict = IGNORE)
-    fun insertRegistrodb(registro: RegistroEntity)
+   suspend fun insertRegistrodb(registro: RegistroEntity)
 
-    // @Query("SELECT * FROM PacienteEntity")
-    //suspend fun getAllPaciente():List<PacienteEntity>
+    @Query("SELECT * FROM RegistroEntity")
+    fun getAllRegistro():Flow<List<RegistroEntity>>
 
-
-    // @Query("SELECT * FROM TvEntity Where Nombre = :idnombre")
-    //suspend fun getOneTv(idnombre:String): PacienteEntity
+    @Delete
+    suspend fun DeleteRegistro(registro: RegistroEntity)
+    @Update
+    suspend fun updateRegistrodb(registro: RegistroEntity)
 
 
 

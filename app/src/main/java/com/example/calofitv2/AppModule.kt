@@ -83,8 +83,8 @@ object AppModule {
     }
     @Provides
     @Singleton
-    fun provideRegistroViewModel(repository: RegistroRepository): RegistroViewModel {
-        return RegistroViewModel(repository)
+    fun provideRegistroViewModel(repository: RegistroRepository,repository2: PlatoRepository,repository3: PacienteRepository): RegistroViewModel {
+        return RegistroViewModel(repository,repository2,repository3)
     }
 
 

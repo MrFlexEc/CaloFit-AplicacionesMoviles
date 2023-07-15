@@ -81,15 +81,15 @@ fun AgregarRegistroInterface(modifier: Modifier,viewModel: RegistroViewModel){
         Spacer(modifier = Modifier.padding(10.dp))
         AgregarImagenRegistro()
         Spacer(modifier = Modifier.padding(8.dp))
-        Pacientemenu()
+        Pacientemenu(viewModel)
         Spacer(modifier = Modifier.padding(8.dp))
-        Platomenu()
+        Platomenu(viewModel)
         Spacer(modifier = Modifier.padding(8.dp))
-        FechaRegistro()
+        FechaRegistro(viewModel)
         Spacer(modifier = Modifier.padding(8.dp))
         PorcionesRegistro(viewModel)
         Spacer(modifier = Modifier.padding(15.dp))
-        btnGuardarRegistro()
+        btnGuardarRegistro(viewModel)
 
 
 
@@ -98,12 +98,12 @@ fun AgregarRegistroInterface(modifier: Modifier,viewModel: RegistroViewModel){
     }
 }
 @Composable
-fun btnGuardarRegistro() {
+fun btnGuardarRegistro(viewModel: RegistroViewModel) {
 
     var show by rememberSaveable{ mutableStateOf(false)}
     // viewModel.GuardarPaciente();show=true
     Button(
-        onClick = { show=true },
+        onClick = { viewModel.GuardarRegistro();show=true },
         colors = ButtonDefaults.buttonColors(
             backgroundColor = Color(0xFF97DF6D)
         ),
@@ -143,7 +143,7 @@ fun DialogoGuardado2(
                     Text(text = "Aceptar")
                 }},
             title = { Text(text = "Calofit", fontSize = 15.sp, color=Color.Black,textAlign = TextAlign.Center)},
-            text = { Text(text = "El paciente se ha ingresado correctamente")}
+            text = { Text(text = "El registro se ha ingresado correctamente")}
         )
     }
 
@@ -154,86 +154,15 @@ fun DialogoGuardado2(
 
 
 @Composable
-fun Pacientemenu(
-    viewModel: RegistroViewModel= hiltViewModel(),
-    viewModel2: PacienteViewModel = hiltViewModel(),
-) {
-
+fun Pacientemenu(viewModel: RegistroViewModel) {
     val state = viewModel.state
-    val state2 = viewModel2.state
-    val pacientesLt = state2.Pacientes
-    var selectedPacienteIndex by remember { mutableStateOf(0) }
+    val pacientes by viewModel.pacientes.collectAsState(initial = emptyList())
+
 
     //Estado para determinar si se despliega o no
     var expanded by remember { mutableStateOf(false) }
     //Estado inicial del item seleccionado
     var selectedItem by remember { mutableStateOf("Paciente") }
-    //Lista auxiliar para mostrar datos
-    // val menuItems = listOf("Opcion 1", "Opcion 2", "Opcion 3")
-
-    Box(
-        Modifier
-            .background(color = Color(0xFFECEDC1))
-            .fillMaxWidth()
-    ) {
-        Text(
-            text = selectedItem,
-            modifier = Modifier
-                //Metodo CLICKABLE para desplegar el DropDownMenu
-                //puedes hacerlo con un BUTTON
-                .clickable { expanded = true }
-                .padding(16.dp)
-                .fillMaxWidth()
-        )
-        DropdownMenu(
-            //expanded apuntando a la propiedad
-            expanded = expanded,
-            //Metodo para replegar el DropDownMenu
-            onDismissRequest = {  },
-        ) {
-
-            //For each para mostrar los items
-            pacientesLt.forEachIndexed {index, paciente ->
-                DropdownMenuItem(onClick = {
-                    //Asignacion de variable y estado del expanded
-                    selectedPacienteIndex = index
-                    viewModel.PacienteN(paciente.Id.toString())
-                }) {
-                    //En el texto mostramos el item seleccionado
-                    Text(paciente.Nombre)
-                }
-
-            }
-        }
-    }
-
-    /*
-    OutlinedTextField(
-        value = state.NombrePaciente,
-        onValueChange = {viewModel.NombrePaciente(it)},
-        label = { Text(text = "Nombre")},
-        placeholder = { Text(text = "Nombre")},
-        singleLine =  true,
-        modifier = Modifier
-            .fillMaxWidth()
-        ,
-        colors = TextFieldDefaults.textFieldColors(
-            backgroundColor = Color(0xFFECEDC1),
-            placeholderColor = Color.Black,
-            focusedLabelColor = Color.Black
-        ))*/
-}
-
-@Composable
-fun Platomenu() {
-    //var menuPaciente by remember { mutableStateOf("") }
-    //val state = viewModel.state
-    //Estado para determinar si se despliega o no
-    var expanded by remember { mutableStateOf(false) }
-    //Estado inicial del item seleccionado
-    var selectedItem by remember { mutableStateOf("Plato") }
-    //Lista auxiliar para mostrar datos
-    val menuItems = listOf("Opcion 1", "Opcion 2", "Opcion 3")
 
     Box(Modifier
         .background(color = Color(0xFFECEDC1))
@@ -255,42 +184,74 @@ fun Platomenu() {
             onDismissRequest = { expanded = false },
         ) {
             //For each para mostrar los items
-            menuItems.forEach{menuItem ->
+            pacientes.forEach{paciente ->
                 DropdownMenuItem(onClick = {
                     //Asignacion de variable y estado del expanded
-                    selectedItem = menuItem
+                    selectedItem = paciente.Nombre
                     expanded = false
+
+                    viewModel.PacienteN(paciente.Id.toString())
                 }) {
                     //En el texto mostramos el item seleccionado
-                    Text(text = menuItem)
+                    Text(text = paciente.Nombre)
                 }
 
             }
         }
     }
-    /*
-    OutlinedTextField(
-        value = state.CedulaPaciente,
-        onValueChange = {viewModel.CedulaPaciente(it)},
-        label = { Text(text = "Cedula")},
-        placeholder = { Text(text = "Cedula")},
-        singleLine =  true,
-        modifier = Modifier
-            .fillMaxWidth()
-        ,
-        colors = TextFieldDefaults.textFieldColors(
-            backgroundColor = Color(0xFFECEDC1),
-            placeholderColor = Color.Black,
-            focusedLabelColor = Color.Black
-        ))*/
 }
 @Composable
-fun FechaRegistro(){
-    // val state = viewModel.state
-    var fecharegistro by remember { mutableStateOf("") }
+fun Platomenu(viewModel: RegistroViewModel) {
+    val state = viewModel.state
+    val platos by viewModel.platos.collectAsState(initial = emptyList())
+
+
+    //Estado para determinar si se despliega o no
+    var expanded by remember { mutableStateOf(false) }
+    //Estado inicial del item seleccionado
+    var selectedItem by remember { mutableStateOf("Plato") }
+
+    Box(Modifier
+        .background(color = Color(0xFFECEDC1))
+        .fillMaxWidth()
+    ) {
+        Text(
+            text = selectedItem,
+            modifier = Modifier
+                //Metodo CLICKABLE para desplegar el DropDownMenu
+                //puedes hacerlo con un BUTTON
+                .clickable { expanded = true }
+                .padding(16.dp)
+                .fillMaxWidth()
+        )
+        DropdownMenu(
+            //expanded apuntando a la propiedad
+            expanded = expanded,
+            //Metodo para replegar el DropDownMenu
+            onDismissRequest = { expanded = false },
+        ) {
+            //For each para mostrar los items
+            platos.forEach{plato ->
+                DropdownMenuItem(onClick = {
+                    //Asignacion de variable y estado del expanded
+                    selectedItem = plato.Nombre
+                    expanded = false
+                    viewModel.PlatoN(plato.Id.toString())
+                }) {
+                    //En el texto mostramos el item seleccionado
+                    Text(text = plato.Nombre)
+                }
+
+            }
+        }
+    }
+}
+@Composable
+fun FechaRegistro(viewModel: RegistroViewModel){
+    val state = viewModel.state
     OutlinedTextField(
-        value = fecharegistro,
-        onValueChange = {fecharegistro=it},
+        value = state.Fecha,
+        onValueChange = {viewModel.FechaRegistro(it)},
         label = { Text(text = "Fecha")},
         placeholder = { Text(text = "Fecha")},
         singleLine =  true,
@@ -340,10 +301,3 @@ fun AgregarImagenRegistro() {
     )
 }
 
-/*
-@Preview(showBackground = true, showSystemUi = true)
-//@Preview(showBackground = true)
-@Composable
-fun PreviewInicio(){
-     AgregarPacienteScreen()
-}*/

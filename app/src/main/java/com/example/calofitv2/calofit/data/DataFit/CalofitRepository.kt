@@ -65,15 +65,29 @@ class RegistroRepository @Inject constructor (
     private val registrodao: RegistroDao
 ) {
 
-    suspend fun Insertregistro (registro: Registro){
-        val Entity = RegistroEntity(PacienteId = registro.PacienteID.toLong()
-            , PlatotId = registro.PlatoID.toLong()
+    suspend fun Insertregistro (registro: RegistroEntity){
+        val Entity = RegistroEntity(PacienteId = registro.PacienteId.toLong()
+            , PlatotId = registro.PlatotId.toLong()
             , Fecha = registro.Fecha
             , Porciones = registro.Porciones.toInt()
 
         )
         return registrodao.insertRegistrodb(Entity)
     }
+
+    suspend fun deletearRegistro(registro: RegistroEntity) {
+        return registrodao.DeleteRegistro(registro)
+    }
+
+    suspend fun ModificarRegistro(registro: RegistroEntity) {
+        registrodao.updateRegistrodb(registro)
+    }
+
+    fun getRegistros():Flow<List<RegistroEntity>>{
+        return registrodao.getAllRegistro()
+    }
+
+
 
 
 
