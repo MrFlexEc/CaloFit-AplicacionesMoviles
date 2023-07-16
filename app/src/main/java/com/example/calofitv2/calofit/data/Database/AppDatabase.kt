@@ -10,7 +10,6 @@ import com.example.calofitv2.calofit.data.DataFit.*
 abstract class AppDatabase:RoomDatabase() {
     abstract fun Pacidao():PacienteDao;
     abstract fun Pladao(): PlatoDao;
-
     abstract fun Regidao(): RegistroDao;
 
 }

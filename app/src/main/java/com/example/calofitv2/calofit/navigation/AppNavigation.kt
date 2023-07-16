@@ -13,7 +13,6 @@ import com.google.firebase.auth.FirebaseAuth
 
 @Composable
 fun AppNavigation(){
-    //Esta vaina permite navegar entre aja interfaces
     val navController = rememberNavController()
     NavHost(navController = navController,
         //startDestination =AppScreen.SplashScreen.route
