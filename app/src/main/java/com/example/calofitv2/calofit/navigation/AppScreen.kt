@@ -12,4 +12,5 @@ sealed class AppScreen (val route: String){
     object AgregarPaciente: AppScreen("Agregar_Paciente_Screen")
     object AgregarPlato: AppScreen("Agregar_Plato_Screen")
     object AgregarRegistro: AppScreen("Agregar_Registro_Screen")
+    object UserConfiguration : AppScreen("User_Configuration")
 }

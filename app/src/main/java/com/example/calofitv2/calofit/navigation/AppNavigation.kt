@@ -47,5 +47,8 @@ fun AppNavigation(){
         composable(AppScreen.AgregarRegistro.route){
             AgregarRegistroScreen(navController)
         }
+        composable(AppScreen.UserConfiguration.route){
+            UserConfigurationScreen(navController)
+        }
     }
 }

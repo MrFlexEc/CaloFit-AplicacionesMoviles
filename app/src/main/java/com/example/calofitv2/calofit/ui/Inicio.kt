@@ -6,12 +6,15 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import com.example.calofitv2.R
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ModifierInfo
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -35,9 +38,16 @@ fun InicioScreen(navController: NavController){
             color = Color.White,
                 textAlign = TextAlign.Center,
                 modifier = Modifier
-                    .fillMaxWidth()
                     .wrapContentSize(align = Alignment.Center)
-                )
+            )
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopEnd) {
+                IconButton(
+                    onClick = { navController.navigate(route = AppScreen.UserConfiguration.route) },
+                    modifier = Modifier.padding(16.dp)
+                ) {
+                    Icon(Icons.Default.Settings, contentDescription = null)
+                }
+            }
         }
     }) {
 
@@ -192,12 +202,13 @@ fun AgregarPlatoInicio(navController: NavController) {
             fontSize = 15.sp,
             color = Color.Black,
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxSize()
                 .wrapContentSize(align = Alignment.CenterStart),
             textAlign = TextAlign.Start,
            // modifier = Modifier.padding(start = 10.dp)
             //.wrapContentSize(align = Alignment.CenterStart)
         )
+
 
 
     }
@@ -211,7 +222,9 @@ fun CerrarSesionInicio(navController: NavController) {
             backgroundColor = Color(0xFF97DF6D)
         ),
         shape = RoundedCornerShape(25),
-        modifier = Modifier.height(40.dp).width(200.dp)
+        modifier = Modifier
+            .height(40.dp)
+            .width(200.dp)
 
         ) {
         Image(
@@ -222,7 +235,8 @@ fun CerrarSesionInicio(navController: NavController) {
             text = "Cerrar Sesion",
             fontSize = 15.sp,
             color = Color.White,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .wrapContentSize(align = Alignment.Center),
             textAlign = TextAlign.Start,
             // modifier = Modifier.padding(start = 10.dp)
